@@ -1,7 +1,12 @@
 import csv
 
+columns_file = 'sample_colname.csv'
+dataset_file = 'dataset_sample.csv'
+output_file = 'output_data.csv'
+columns_dict = dict()
 
-def gencolnamehashmap(colnames_file):
+
+def gen_column_names_dict(colnames_file):
     cleaned = dict()
     with open(colnames_file, newline='') as csvfile:
         column_names = csv.reader(csvfile, delimiter=',')
@@ -43,19 +48,19 @@ def write_list_to_file(filename, data_list):
         writer = csv.writer(f, quoting=csv.QUOTE_ALL)
         writer.writerows(data_list)
 
-columns_hash = gencolnamehashmap('sample_colname.csv')
+columns_hash = gen_column_names_dict(columns_file)
 
 #print(', '.join(columns_hash))
 #exit(1)
 
-cleaned_dict = read_csv_cols("dataset_sample.csv", columns_hash)
+cleaned_dict = read_csv_cols(dataset_file, columns_hash)
 
 #for key in cleaned_dict:
 #    print (key, cleaned_dict[key])
 
-refined_dict = clean_up_data("dataset_sample.csv", cleaned_dict)
+refined_dict = clean_up_data(dataset_file, cleaned_dict)
 
 #for key in refined_dict:
 #    print(key)
 
-write_list_to_file("output_data.csv", refined_dict)
+write_list_to_file(output_file, refined_dict)
