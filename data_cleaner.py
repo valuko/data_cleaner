@@ -1,9 +1,14 @@
 import csv
 
-columns_file = 'sample_colname.csv'
-dataset_file = 'dataset_sample.csv'
-output_file = 'output_data.csv'
 columns_dict = dict()
+# Test data
+#columns_file = 'sample_colname.csv'
+#dataset_file = 'dataset_sample.csv'
+#output_file = 'output_data_test.csv'
+# Live data
+columns_file = 'column_dataset.csv'
+dataset_file = 'epi_r.csv'
+output_file = 'output_data.csv'
 
 
 def gen_column_names_dict(colnames_file):
@@ -22,7 +27,8 @@ def read_csv_cols(filename, col_hash):
         csv_headings = next(csv_reader)
         i = 0
         for heading in csv_headings:
-            if heading in col_hash:
+            cl_heading = heading.strip(' \t\n\r')
+            if cl_heading in col_hash:
                 col_hash[heading] = i
             i += 1
     return col_hash
