@@ -2,13 +2,15 @@ import csv
 
 columns_dict = dict()
 # Test data
-#columns_file = 'sample_colname.csv'
-dataset_file = 'dataset_sample.csv'
-output_file = 'output_data_test.csv'
+# columns_file = 'sample_colname.csv'
+# dataset_file = 'dataset_sample.csv'
+# output_file = 'output_data_test.csv'
+# categorized_data_file = 'output_data_categorized_test.csv'
 # Live data
 columns_file = 'column_dataset.csv'
-# dataset_file = 'epi_r.csv'
-# output_file = 'output_data.csv'
+dataset_file = 'epi_r.csv'
+output_file = 'output_data.csv'
+categorized_data_file = 'categorized_output_data.csv'
 
 
 def gen_column_names_dict(colnames_file):
@@ -79,6 +81,7 @@ def categorize_data(data_list):
                     sanitized.append(stripped_val)
             idx += 1
         response_data.append(sanitized)
+    #return [columns_list] + response_data
     return response_data
 
 columns_hash = gen_column_names_dict(columns_file)
@@ -96,9 +99,11 @@ refined_list = clean_up_data(dataset_file, cleaned_dict)
 #for key in refined_list:
 #    print(key)
 
-#write_list_to_file(output_file, refined_list)
+write_list_to_file(output_file, refined_list)
 
 # Categorize the data
 data_categorized = categorize_data(refined_list)
 #for key in data_categorized:
 #    print(key)
+
+write_list_to_file(categorized_data_file, data_categorized)
