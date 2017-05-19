@@ -2,11 +2,11 @@ import csv
 
 columns_dict = dict()
 # Test data
-columns_file = 'sample_colname.csv'
+#columns_file = 'sample_colname.csv'
 dataset_file = 'dataset_sample.csv'
 output_file = 'output_data_test.csv'
 # Live data
-# columns_file = 'column_dataset.csv'
+columns_file = 'column_dataset.csv'
 # dataset_file = 'epi_r.csv'
 # output_file = 'output_data.csv'
 
@@ -62,15 +62,21 @@ def categorize_data(data_list):
         idx = 0
         sanitized = []
         for val in data:
+            stripped_val = val.strip(' \t\n\r')
+            if idx < 6:
+                val = "NA" if stripped_val == "" else stripped_val
+                sanitized.append(val)
+                idx += 1
+                continue
+
             try:
-                float_val = float(val)
+                float_val = float(stripped_val)
                 if float_val > 0.0:
                     cat = float_val if float_val > 1 else columns_list[idx]
                     sanitized.append(cat)
             except ValueError:
-                stripped = val.strip(' \t\n\r')
-                if stripped != "":
-                    sanitized.append(stripped)
+                if stripped_val != "":
+                    sanitized.append(stripped_val)
             idx += 1
         response_data.append(sanitized)
     return response_data
@@ -94,5 +100,5 @@ refined_list = clean_up_data(dataset_file, cleaned_dict)
 
 # Categorize the data
 data_categorized = categorize_data(refined_list)
-for key in data_categorized:
-    print(key)
+#for key in data_categorized:
+#    print(key)
