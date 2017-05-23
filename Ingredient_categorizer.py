@@ -2,12 +2,12 @@ import csv
 import math
 
 ingredients = dict()
-mode = 1
-test = 1
+mode = 0
+test = 0
 cut_off_col = 6
 
 if test == 1:
-    dataset_file = 'test_ingredient_date.csv'
+    dataset_file = 'test_ingredient_data.csv'
     out_data_file = 'test_new_ingredients.csv'
 else:
     dataset_file = 'raw_ingredients_data.csv'
@@ -15,16 +15,18 @@ else:
 
 if mode == 1:
     col_num = 1
-    output_cols = [1, 2, 3, 4, 5, 6]
+    output_cols = [1, 2, 3, 4, 5]
+    out_data_file = "ratings_"+out_data_file
 else:
     col_num = 2
+    out_data_file = "calories_" + out_data_file
     output_cols = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800,
-                   1900, 2000]
+                   1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000]
 
 
 def read_csv_data(filename, run_mode):
     ingredients_dict = dict()
-    with open(filename, newline='') as csvfile:
+    with open(filename, newline='', encoding='utf-8') as csvfile:
         rows = csv.reader(csvfile, delimiter=',')
         for row in rows:
             idx = -1
@@ -61,7 +63,7 @@ def write_ingredients_csv(filename, data):
             for i in output_cols:
                 new_val = data_rec[i] if (i in data_rec) else 0
                 out_list.append(new_val)
-            print(out_list)
+            # print(out_list)
             writer.writerow(out_list)
 
 
