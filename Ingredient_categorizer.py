@@ -2,16 +2,27 @@ import csv
 import math
 
 ingredients = dict()
-# col_num = 2
-col_num = 1
+mode = 1
+test = 1
 cut_off_col = 6
-dataset_file = 'test_ingredient_date.csv'
-out_data_file = 'new_ingredients.csv'
-output_cols = [1, 2, 3, 4, 5, 6]
-# output_cols = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700]
+
+if test == 1:
+    dataset_file = 'test_ingredient_date.csv'
+    out_data_file = 'test_new_ingredients.csv'
+else:
+    dataset_file = 'raw_ingredients_data.csv'
+    out_data_file = 'new_ingredients_data.csv'
+
+if mode == 1:
+    col_num = 1
+    output_cols = [1, 2, 3, 4, 5, 6]
+else:
+    col_num = 2
+    output_cols = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800,
+                   1900, 2000]
 
 
-def read_csv_data(filename):
+def read_csv_data(filename, run_mode):
     ingredients_dict = dict()
     with open(filename, newline='') as csvfile:
         rows = csv.reader(csvfile, delimiter=',')
@@ -23,13 +34,13 @@ def read_csv_data(filename):
                 if col_num == idx:
                     if val == 'NA':
                         break
-                    target_val = int(math.floor(float(val)))
-                    # convert to nearest hundred
-                    # target_val = int(float(val) / 100.0) * 100
+
+                    target_val = int(float(val) / 100.0) * 100
+                    if run_mode == 1:
+                        target_val = int(math.floor(float(val)))
                     continue
                 if idx < cut_off_col:
                     continue
-                #print('val: ', val)
                 if val == 'NA' or val.strip(' \t\n\r') == "":
                     break
                 if not (val in ingredients_dict):
@@ -54,8 +65,8 @@ def write_ingredients_csv(filename, data):
             writer.writerow(out_list)
 
 
-target_results = read_csv_data(dataset_file)
+target_results = read_csv_data(dataset_file, mode)
 
-#print(target_results)
+# print(target_results)
 
 write_ingredients_csv(out_data_file, target_results)
