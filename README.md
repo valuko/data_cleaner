@@ -2,3 +2,5 @@
 Data Mining cleanup repository
 
 Repository containing the code used to cleanup the data in the data mining project
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/598ed2c9831a721d7966#?env%5BiPEGMA%5D=W3siZW5hYmxlZCI6dHJ1ZSwia2V5IjoidXNlcl9rZXkiLCJ2YWx1ZSI6Im9hWllFYzEyR3oiLCJ0eXBlIjoidGV4dCJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5IjoidGVzdF9ib29rX2tleSIsInZhbHVlIjoid3o5OHl6IiwidHlwZSI6InRleHQifSx7ImVuYWJsZWQiOnRydWUsImtleSI6ImJhc2VfdXJsIiwidmFsdWUiOiJodHRwOi8vYnVzeS50ZXN0LmlwZWdtYS5jaC9hcGkiLCJ0eXBlIjoidGV4dCJ9XQ==)
